@@ -2,27 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\ApiService;
+use App\Services\PlanningService;
 use Illuminate\Http\Request;
 
 class AppController extends Controller
 {
-    //
-    public $apiService;
-
+    public $planningService;
+    
     public function __construct()
     {
-        if($this->apiService == null){
-            $this->apiService = new ApiService();    
+        if($this->planningService == null){
+            $this->planningService = new PlanningService();    
         }
     }
 
 
     public function PlanningPage(Request $request)
     {
-        // dd($this->apiService->PlanForFastest());
         return view('job_planning', [
-            'devToJobDict' => $this->apiService->PlanToAll()
+            'devToJobDict' => $this->planningService->PlanToAll()
         ]);
     }
 }
